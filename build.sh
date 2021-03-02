@@ -1,95 +1,12 @@
 #!/bin/bash
+source configs/build*.sh
 
-# This, is the main point, where all things change
+git clone --depth=1 --single-branch https://github.com/dahliaOS/buildroot /drone/src/build/
+cd /drone/src/build/ 
 
-cd /drone/src/work/
-# Clone tree START
-git clone https://github.com/ceb08/device_xiaomi_miatoll device/xiaomi/miatoll # Clone your trees here
-# CLONE TREE END
+# Build 
+make&&qemu-system-x86_64 --enable-kvm -m 4096 -cdrom output/images/rootfs.iso9660&&cp output/images/rootfs.iso9660 output/images/rootfs.iso
 
-# VARIABLES, DEFINE THEM ELSE YOU'RE GAY
-DEVICE=miatoll
-TARGET=recoveryimage
-# END VARIABLES
-
-. build/envsetup.sh
-export ALLOW_MISSING_DEPENDENCIES=true
-lunch omni_$DEVICE-eng
-mka $TARGET -j48
-
-# Upload
-cd out/target/product/$DEVICE/
-touch links.txt
-echo "Recovery image on wetransfer: " >> links.txt
-transfer wet recovery.img  | grep Download >> links.txt
-
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo "" 
-cat links.txt 
+# Upload 
+cd output/images/ 
+transfer wet rootfs.iso 
