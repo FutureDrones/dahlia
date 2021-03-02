@@ -8,7 +8,7 @@ apt-get -y update && apt-get -y upgrade && apt-get -y install bc build-essential
 apt-get -y install nano ccache git screen
 apt-get -y install \
     adb autoconf automake axel bc bison build-essential \
-    ccache clang cmake expat fastboot flex g++ \
+    ccache clang cpio cmake expat fastboot flex g++ \
     g++-multilib gawk gcc gcc-multilib git gnupg gperf \
     htop imagemagick lib32ncurses5-dev lib32z1-dev libtinfo5 libc6-dev libcap-dev \
     libexpat1-dev libgmp-dev '^liblz4-.*' '^liblzma.*' libmpc-dev libmpfr-dev libncurses5-dev \
